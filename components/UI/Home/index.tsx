@@ -26,19 +26,21 @@ const HomePage = () => {
       </div> */}
 
       <div className="fixed bg-[#4b2f28] text-white -z-[10] w-full min-h-screen top-0 left-0">
-        <Image
-          src={"/images/backgrounds/model1.png"}
-          width={600}
-          height={900}
-          alt="Model"
-          draggable={false}
-          className="mx-auto relative top-20 select-none"
-        />
+        <div className="relative min-h-screen w-full flex items-center justify-center">
+          <Image
+            src={"/images/backgrounds/model1.png"}
+            width={600}
+            height={900}
+            alt="Model"
+            draggable={false}
+            className="mx-auto absolute -bottom-[15rem] select-none"
+          />
+        </div>
       </div>
 
       {/* Hero */}
       <section>
-        <div className="h-screen -mt-[4rem] flex items-center">
+        <div className="h-screen -mt-[3rem] flex items-center">
           <WidthClamp addClass="flex items-center">
             <div className="flex-1 space-y-6">
               <h1 className={`${playfair.className} font-extrabold text-6xl text-white leading-relaxed`}>
@@ -77,6 +79,27 @@ const HomePage = () => {
             </div>
           </WidthClamp>
         </div>
+      </section>
+
+      <section className="h-screen flex items-center">
+        <WidthClamp>
+          <div className="flex justify-between">
+            <div className="flex-1 space-y-5">
+              <h2 className={`${playfair.className} font-extrabold text-6xl`}>About Us</h2>
+              <p className="text-lg leading-relaxed font-extralight">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum tenetur eius quidem expedita reiciendis
+                dicta libero quod assumenda voluptates sit! Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Veniam doloremque iure tenetur. Vel, quas mollitia autem eligendi animi officiis deleniti nam sunt, qui
+                quos tempora impedit? Temporibus iste eligendi sint!
+              </p>
+              <p className="text-lg leading-relaxed font-extralight">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum tenetur eius quidem expedita reiciendis
+                dicta libero quod assumenda voluptates sit! Lorem,
+              </p>
+            </div>
+            <div className="flex-1"></div>
+          </div>
+        </WidthClamp>
       </section>
     </main>
   );
