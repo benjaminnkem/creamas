@@ -5,12 +5,42 @@ import { playfair } from "@/lib/utils/fonts";
 import classNames from "classnames";
 import Image from "next/image";
 import { ShoppingBagIcon } from "lucide-react";
-// import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import Lenis from "@studio-freight/lenis";
 
 const HomePage = () => {
-  // gsap.to(".overlay-layer-1", { height: 0, delay: 0.25 });
-  // gsap.to(".overlay-layer-2", { height: 0, delay: 0.45 });
-  // gsap.to(".overlay-layer-3", { height: 0, delay: 0.6 });
+  const overlayContainer = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    lenis.on("scroll", (e: any) => {
+      console.log(e);
+    });
+
+    function raf(time: any) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => lenis.off("scroll", () => {});
+  }, []);
+
+  useEffect(() => {
+    const cxt = gsap.context(() => {
+      gsap
+        .timeline()
+        .to(".overlay-layer-1", { height: 0, duration: 0.4 })
+        .to(".overlay-layer-2", { height: 0, duration: 0.4 })
+        .to(".overlay-layer-3", { height: 0, duration: 0.4 })
+        .to(overlayContainer.current, { height: 0 });
+    }, overlayContainer);
+
+    return () => cxt.revert();
+  }, []);
 
   const joinUsClass = classNames([
     "bg-transparent px-4 py-2 rounded-sm font-semibold duration-200 transition-colors gap-2",
@@ -19,11 +49,11 @@ const HomePage = () => {
 
   return (
     <main>
-      {/* <div className="overlay flex absolute z-[200] min-h-screen w-full top-0 left-0">
-        <div className="flex-1 bg-[#4b2f28] min-h-screen overlay-layer-1"></div>
-        <div className="flex-1 bg-[#4b2f28] min-h-screen overlay-layer-2"></div>
-        <div className="flex-1 bg-[#4b2f28] min-h-screen overlay-layer-3"></div>
-      </div> */}
+      <div className="overlay flex absolute z-[200] h-screen w-full top-0 left-0" ref={overlayContainer}>
+        <div className="flex-1 bg-[#4b2f28] h-screen overlay-layer-1"></div>
+        <div className="flex-1 bg-[#4b2f28] h-screen overlay-layer-2"></div>
+        <div className="flex-1 bg-[#4b2f28] h-screen overlay-layer-3"></div>
+      </div>
 
       <div className="fixed bg-[#4b2f28] text-white -z-[10] w-full min-h-screen top-0 left-0">
         <div className="relative min-h-screen w-full flex items-center justify-center">
@@ -81,7 +111,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="h-screen flex items-center">
+      <section className="h-screen flex items-center my-20">
         <WidthClamp>
           <div className="flex justify-between">
             <div className="flex-1 space-y-5">
@@ -98,6 +128,27 @@ const HomePage = () => {
               </p>
             </div>
             <div className="flex-1"></div>
+          </div>
+        </WidthClamp>
+      </section>
+
+      <section className="h-screen flex items-center my-20">
+        <WidthClamp>
+          <div className="flex justify-between">
+            <div className="flex-1"></div>
+            <div className="flex-1 space-y-5">
+              <h2 className={`${playfair.className} font-extrabold text-6xl`}>About Us</h2>
+              <p className="text-lg leading-relaxed font-extralight">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum tenetur eius quidem expedita reiciendis
+                dicta libero quod assumenda voluptates sit! Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Veniam doloremque iure tenetur. Vel, quas mollitia autem eligendi animi officiis deleniti nam sunt, qui
+                quos tempora impedit? Temporibus iste eligendi sint!
+              </p>
+              <p className="text-lg leading-relaxed font-extralight">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum tenetur eius quidem expedita reiciendis
+                dicta libero quod assumenda voluptates sit! Lorem,
+              </p>
+            </div>
           </div>
         </WidthClamp>
       </section>
