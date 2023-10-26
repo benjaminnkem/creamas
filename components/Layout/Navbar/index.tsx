@@ -4,8 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import { playfair } from "@/lib/utils/fonts";
+import { useLayoutEffect } from "react";
+import { gsap } from "gsap";
 
 const Navbar = () => {
+  useLayoutEffect(() => {
+    const t1 = gsap.timeline();
+
+    t1.fromTo(
+      ".logo",
+      { xPercent: -100, opacity: 0, duration: 1, ease: "power1.out" },
+      { xPercent: 0, opacity: 1, duration: 1, ease: "power1.out" }
+    );
+    t1.fromTo(
+      ".navlink",
+      { xPercent: 100, opacity: 0 },
+      { opacity: 1, xPercent: 0, ease: "power1.out", stagger: { amount: 0.5, from: "start" } }
+    );
+  }, []);
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Market", path: "/market" },
@@ -26,7 +43,7 @@ const Navbar = () => {
       ]);
 
       return (
-        <Link key={idx} href={link.path}>
+        <Link key={idx} href={link.path} className="navlink">
           <li className={linkClass}>{link.name}</li>
         </Link>
       );
@@ -37,7 +54,7 @@ const Navbar = () => {
     <nav>
       <WidthClamp>
         <div className="flex items-center justify-between py-3">
-          <Link href={"/"} className={`${playfair.className} font-bold text-2xl text-white`}>
+          <Link href={"/"} className={`${playfair.className} font-bold text-2xl text-white logo`}>
             CREAMAS
           </Link>
 
