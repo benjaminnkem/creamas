@@ -9,6 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       // container: { screens: { xxl: "2400px" } },
+      colors: {
+        primaryColor: "#4b2f28",
+        primaryColorLight: "#5d3a32",
+        primaryColorDark: "#3d2721",
+      },
     },
   },
   plugins: [],

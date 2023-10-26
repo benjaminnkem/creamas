@@ -28,8 +28,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Market", path: "/market" },
-    { name: "Examples", path: "/examples" },
+    { name: "Trending", path: "/trending" },
+    { name: "Marketplace", path: "/market" },
     { name: "Login", path: "/account/login" },
   ];
 

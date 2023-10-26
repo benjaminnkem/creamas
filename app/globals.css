@@ -47,3 +47,8 @@ html.lenis {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* Login */
+#loginContainer {
+  background: linear-gradient(to right, #4b2f28 50%, #a96b5c 50%);
+}

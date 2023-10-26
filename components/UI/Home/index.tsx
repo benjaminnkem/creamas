@@ -112,7 +112,7 @@ const HomePage = () => {
       </div>
 
       <div id="descHome">
-        <section className="fixed bg-[#4b2f28] text-white -z-[10] w-full min-h-screen top-0 left-0">
+        <section className="fixed bg-primaryColor text-white -z-[10] w-full min-h-screen top-0 left-0">
           <div className="relative min-h-screen w-full flex items-center justify-center opacity-0" id="bgModel">
             <Image
               src={"/images/backgrounds/model1.png"}
