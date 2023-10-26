@@ -17,6 +17,20 @@ const HomePage = () => {
   const overlayContainer = useRef<HTMLDivElement>(null);
   const bgImageContainer = useRef<HTMLDivElement>(null);
 
+  // Instantiate Lenis
+  // useLayoutEffect(() => {
+  //   const lenis = new Lenis();
+
+  //   lenis.on("scroll", ScrollTrigger.update);
+
+  //   gsap.ticker.add((time) => {
+  //     lenis.raf(time * 1000);
+  //   });
+
+  //   gsap.ticker.lagSmoothing(0);
+  // }, []);
+
+  // Transitions
   useLayoutEffect(() => {
     const cxt = gsap.context(() => {
       gsap
@@ -49,7 +63,7 @@ const HomePage = () => {
           trigger: "#aboutSection",
           start: "top center",
           end: "bottom bottom",
-          scrub: 1,
+          scrub: 0.5,
         },
       });
 
@@ -60,7 +74,7 @@ const HomePage = () => {
           end: "center top",
           endTrigger: "lastHead",
           // markers: true,
-          scrub: 1,
+          scrub: 0.5,
         },
       });
 
@@ -89,7 +103,7 @@ const HomePage = () => {
 
   return (
     <main ref={bgImageContainer}>
-      <div className="overlay flex absolute z-[200] h-screen w-full top-0 left-0" ref={overlayContainer}>
+      <div className="overlay flex fixed z-[200] h-screen w-full top-0 left-0" ref={overlayContainer}>
         {Array(5)
           .fill(null)
           .map((_, idx) => (
@@ -99,7 +113,7 @@ const HomePage = () => {
 
       <div id="descHome">
         <section className="fixed bg-[#4b2f28] text-white -z-[10] w-full min-h-screen top-0 left-0">
-          <div className="relative min-h-screen w-full flex items-center justify-center" id="bgModel">
+          <div className="relative min-h-screen w-full flex items-center justify-center opacity-0" id="bgModel">
             <Image
               src={"/images/backgrounds/model1.png"}
               width={600}
@@ -123,11 +137,13 @@ const HomePage = () => {
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic eius sapiente tenetur inventore
                   veritatis impedit? Enim accusamus ex amet magni aspernatur
                 </p>
+
                 <button className={`${joinUsClass} lhero`}>
                   <span>Order Now</span>
                   <ShoppingBagIcon size={18} />
                 </button>
               </div>
+
               <div className="flex-1 relative min-h-[30rem]">
                 <div className="absolute space-y-2 left-32 top-0 max-w-[18rem] backdrop-blur-sm p-2 rhero">
                   <p className="font-bold text-xl w-fit">
@@ -143,7 +159,6 @@ const HomePage = () => {
                 </div>
                 <div className="absolute bottom-10 left-40 space-y-2 max-w-[18rem] backdrop-blur-sm p-2 rhero">
                   <p className="font-bold text-xl w-fit">
-                    {" "}
                     <span className="text-3xl text-[#ae7769]">3.</span> On Time Delivery
                   </p>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, fugiat.</p>

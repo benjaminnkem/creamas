@@ -4,11 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import { playfair } from "@/lib/utils/fonts";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const Navbar = () => {
+  const navEl = useRef<HTMLElement>(null);
+
   useLayoutEffect(() => {
+    navEl.current?.focus();
     const t1 = gsap.timeline();
 
     t1.fromTo(
@@ -51,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
+    <nav ref={navEl}>
       <WidthClamp>
         <div className="flex items-center justify-between py-3">
           <Link href={"/"} className={`${playfair.className} font-bold text-2xl text-white logo`}>
