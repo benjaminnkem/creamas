@@ -10,6 +10,7 @@ import { gsap } from "gsap";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HomeStickySect from "./sticky-sect";
+import toast from "react-hot-toast";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,7 +139,7 @@ const HomePage = () => {
                   veritatis impedit? Enim accusamus ex amet magni aspernatur
                 </p>
 
-                <button className={`${joinUsClass} lhero`}>
+                <button className={`${joinUsClass} lhero`} onClick={() => toast.success("Product coming soon...")}>
                   <span>Order Now</span>
                   <ShoppingBagIcon size={18} />
                 </button>

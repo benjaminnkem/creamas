@@ -8,14 +8,7 @@ export const metadata: Metadata = {
 const Login = () => {
   return (
     <main>
-      <div
-        className="fixed w-full h-full top-0 left-0 bg-gradient-to-r to-primaryColor from-[#a96b5c]"
-        id="loginContainer"
-      >
-        <div className="w-full h-full flex items-center justify-center">
-          <LoginForm />
-        </div>
-      </div>
+      <LoginForm />
     </main>
   );
 };
