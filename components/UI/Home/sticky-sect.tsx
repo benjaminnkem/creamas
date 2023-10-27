@@ -7,7 +7,8 @@ import { useLayoutEffect, useRef } from "react";
 
 const HomeStickySect = () => {
   const container = useRef<HTMLDivElement>(null);
-  const pinsect = useRef<HTMLDivElement>(null);
+  const pinSection = useRef<HTMLDivElement>(null);
+  const displayWrap = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const cxt = gsap.context(() => {
@@ -39,16 +40,47 @@ const HomeStickySect = () => {
 
   useLayoutEffect(() => {
     const cxt = gsap.context(() => {
-      gsap.to(".pin-sect", {
-        scrollTrigger: { start: "top top", end: "bottom bottom", trigger: ".pin-sect", pin: true },
+      const t1 = gsap.timeline();
+
+      t1.from(".pin-sect-2", { xPercent: 100, ease: "none", duration: 2 });
+      t1.from(".pin-sect-3", { xPercent: 100, ease: "none", duration: 2 });
+      t1.from(".pin-sect-4", { xPercent: 100, ease: "none", duration: 2 });
+
+      ScrollTrigger.create({
+        animation: t1,
+        trigger: pinSection.current,
+        start: "top top",
+        end: "+=4100",
+        pin: true,
+        anticipatePin: 1,
+        scrub: 1,
       });
-    }, pinsect);
+    }, pinSection);
+
+    return () => cxt.revert();
+  }, []);
+
+  useLayoutEffect(() => {
+    const cxt = gsap.context(() => {
+      const t = gsap.timeline({
+        scrollTrigger: {
+          trigger: displayWrap.current,
+        },
+      });
+      t.from(".dis-con", {
+        yPercent: 100,
+        opacity: 0,
+        width: 0,
+        stagger: { amount: 0.5, from: "start" },
+        // duration: 5,
+      });
+    }, displayWrap);
 
     return () => cxt.revert();
   });
 
   return (
-    <>
+    <div id="sect-wrapper__">
       <section className="my-20">
         <WidthClamp>
           <div className="w-full p-10 grid gap-6 grid-cols-2" ref={container}>
@@ -77,7 +109,7 @@ const HomeStickySect = () => {
         </WidthClamp>
       </section>
 
-      <div ref={pinsect}>
+      <div ref={pinSection} className="relative h-screen">
         {new Array(4).fill(null).map((_, idx) => {
           const background = classNames({
             "bg-amber-100": idx + 1 === 1,
@@ -88,7 +120,9 @@ const HomeStickySect = () => {
           return (
             <section
               key={idx}
-              className={`h-screen ${background} w-full flex items-center justify-center text-black pin-sect`}
+              className={`${background} w-full absolute top-0 left-0 h-full flex items-center justify-center text-black pin-sect-${
+                idx + 1
+              }`}
             >
               <div>
                 <p className="font-medium text-4xl">Section {idx + 1}</p>
@@ -97,7 +131,27 @@ const HomeStickySect = () => {
           );
         })}
       </div>
-    </>
+
+      <section ref={displayWrap}>
+        <div className="h-screen flex items-center">
+          <WidthClamp>
+            <div className="flex items-center justify-evenly gap-4">
+              {new Array(3).fill(null).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="p-10 border rounded-lg flex-1 backdrop-blur-md border-primaryColorLight dis-con"
+                >
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic vero a incidunt accusamus repellat
+                    recusandae eligendi unde excepturi ducimus provident.
+                  </p>
+                </div>
+              ))}
+            </div>
+          </WidthClamp>
+        </div>
+      </section>
+    </div>
   );
 };
 

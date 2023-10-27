@@ -11,6 +11,15 @@ html {
   display: none;
 }
 
+/* ::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba(183, 155, 155, 0.53);
+} */
+
+::-webkit-scrollbar-thumb {
+  background: brown;
+}
+
 ::-moz-selection {
   background: #ae77694d;
 }
