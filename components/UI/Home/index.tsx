@@ -111,14 +111,14 @@ const HomePage = () => {
         <div id="descHome">
           <section className="fixed bg-primaryColor text-white -z-[10] w-full min-h-screen top-0 left-0">
             <div className="relative min-h-screen w-full flex items-center justify-center opacity-0" id="bgModel">
-              <Image
+              {/* <Image
                 src={"/images/backgrounds/model1.png"}
                 width={600}
                 height={900}
                 alt="Model"
                 draggable={false}
                 className="mx-auto absolute -bottom-[24rem] md:-bottom-[20rem] lg:-bottom-[18rem] select-none"
-              />
+              /> */}
             </div>
           </section>
 
