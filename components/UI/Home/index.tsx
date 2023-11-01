@@ -3,14 +3,13 @@
 import WidthClamp from "@/components/Common/Custom/width-clamp";
 import { playfair } from "@/lib/utils/fonts";
 import classNames from "classnames";
-import Image from "next/image";
 import { ShoppingBagIcon } from "lucide-react";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HomeStickySect from "./sticky-sect";
 import toast from "react-hot-toast";
-// import { ScrollSmoother } from "gsap/ScrollSmoother";
+import Lenis from "@studio-freight/lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,13 +17,24 @@ const HomePage = () => {
   const overlayContainer = useRef<HTMLDivElement>(null);
   const bgImageContainer = useRef<HTMLDivElement>(null);
 
-  // Initialize scroll smoother
-  // useLayoutEffect(() => {
-  //   let smoother = ScrollSmoother.create({
-  //     content: "#smooth-content",
-  //     wrapper: "#smooth-wrapper",
-  //   });
-  // }, []);
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1 });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }, []);
 
   // Transitions
   useLayoutEffect(() => {
