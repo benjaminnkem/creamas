@@ -140,6 +140,7 @@ const HomePage = () => {
                   onLoad={onLoad}
                   id="bunny"
                 />
+                <div id="bunny"></div>
               </Suspense>
             </div>
           </section>

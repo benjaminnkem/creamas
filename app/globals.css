@@ -12,10 +12,10 @@ body {
   min-height: 100%;
   height: auto;
 }
-
+/* 
 *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 ::-webkit-scrollbar-thumb {
   background: brown;
@@ -33,10 +33,20 @@ body {
   color: white;
 }
 
+.grad-bottom {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.606), transparent);
+}
+
+/* Login */
+#loginContainer {
+  background: linear-gradient(to right, #4b2f28 50%, #a96b5c 50%);
+}
+
 .text-shadow {
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.24);
 }
 
+/* Lenis */
 html.lenis {
   height: auto;
 }
@@ -57,7 +67,7 @@ html.lenis {
   pointer-events: none;
 }
 
-/* Login */
-#loginContainer {
-  background: linear-gradient(to right, #4b2f28 50%, #a96b5c 50%);
+/* Hme */
+#wrapper {
+  overflow-x: hidden;
 }
