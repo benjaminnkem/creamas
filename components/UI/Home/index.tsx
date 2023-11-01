@@ -4,12 +4,13 @@ import WidthClamp from "@/components/Common/Custom/width-clamp";
 import { playfair } from "@/lib/utils/fonts";
 import classNames from "classnames";
 import { ShoppingBagIcon } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HomeStickySect from "./sticky-sect";
 import toast from "react-hot-toast";
 import Lenis from "@studio-freight/lenis";
+import Spline from "@splinetool/react-spline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,8 +18,18 @@ const HomePage = () => {
   const overlayContainer = useRef<HTMLDivElement>(null);
   const bgImageContainer = useRef<HTMLDivElement>(null);
 
+  // Spline
+  const bunnySpline = useRef();
+
+  function onLoad(spline: any) {
+    const obj = spline.findObjectByName("bunny");
+
+    bunnySpline.current = obj;
+  }
+
+  // Lenis
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1 });
+    const lenis = new Lenis({ duration: 1.2 });
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -84,19 +95,21 @@ const HomePage = () => {
         },
       });
 
-      tl.to("#bgModel", {
-        scale: 1.3,
+      tl.to("#bunny", {
+        scale: 1.2,
         opacity: 0.2,
         x: 500,
+        rotateX: -Math.PI / 14,
+        rotateZ: Math.PI / 36,
       });
 
       tl2
-        .to("#bgModel", {
+        .to("#bunny", {
           scale: 1,
           opacity: 1,
-          x: -500,
+          x: -400,
         })
-        .to("#bgModel", { opacity: 0 });
+        .to("#bunny", { opacity: 0, scale: 1 });
     }, bgImageContainer);
 
     return () => cxt.revert();
@@ -121,14 +134,13 @@ const HomePage = () => {
         <div id="descHome">
           <section className="fixed bg-primaryColor text-white -z-[10] w-full min-h-screen top-0 left-0">
             <div className="relative min-h-screen w-full flex items-center justify-center opacity-0" id="bgModel">
-              {/* <Image
-                src={"/images/backgrounds/model1.png"}
-                width={600}
-                height={900}
-                alt="Model"
-                draggable={false}
-                className="mx-auto absolute -bottom-[24rem] md:-bottom-[20rem] lg:-bottom-[18rem] select-none"
-              /> */}
+              <Suspense fallback={<div></div>}>
+                <Spline
+                  scene="https://prod.spline.design/pTzIrpLRs9-ONnnB/scene.splinecode"
+                  onLoad={onLoad}
+                  id="bunny"
+                />
+              </Suspense>
             </div>
           </section>
 
