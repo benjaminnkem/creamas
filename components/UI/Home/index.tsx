@@ -68,12 +68,7 @@ const HomePage = () => {
           { opacity: 0, yPercent: 10 },
           { opacity: 1, yPercent: 0, delay: 0.25, ease: "power1.out", stagger: { amount: 0.75, from: "start" } }
         )
-        .fromTo("#bgModel", { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 1 })
-        .fromTo(
-          ".rhero",
-          { opacity: 0, yPercent: 10 },
-          { opacity: 1, yPercent: 0, delay: 0.25, ease: "power1.out", stagger: { amount: 0.75, from: "start" } }
-        );
+        .fromTo("#bgModel", { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 1 });
 
       let tl = gsap.timeline({
         scrollTrigger: {
@@ -162,27 +157,6 @@ const HomePage = () => {
                     <span>Order Now</span>
                     <ShoppingBagIcon size={18} />
                   </button>
-                </div>
-
-                <div className="flex-1 relative min-h-[30rem]">
-                  <div className="absolute space-y-2 left-32 top-0 max-w-[18rem] backdrop-blur-sm p-2 rhero">
-                    <p className="font-bold text-xl w-fit">
-                      <span className="text-3xl text-[#ae7769]">1.</span> Glowing Skin
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, fugiat.</p>
-                  </div>
-                  <div className="absolute space-y-2 right-0 top-[8rem] max-w-[18rem] backdrop-blur-sm p-2 rhero">
-                    <p className="font-bold text-xl w-fit">
-                      <span className="text-3xl text-[#ae7769]">2.</span> Natural
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                  </div>
-                  <div className="absolute bottom-10 left-40 space-y-2 max-w-[18rem] backdrop-blur-sm p-2 rhero">
-                    <p className="font-bold text-xl w-fit">
-                      <span className="text-3xl text-[#ae7769]">3.</span> On Time Delivery
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, fugiat.</p>
-                  </div>
                 </div>
               </WidthClamp>
             </div>
